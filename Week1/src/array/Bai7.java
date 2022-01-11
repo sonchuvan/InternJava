@@ -23,12 +23,10 @@ public class Bai7 {
                     dem++;
                     temp = a[j];
                 }else break;
-                System.out.println( "dem:"+dem);
             }
             if(max<dem){
                 max = dem;
                 flag = i;
-                System.out.println("flag:"+flag);
             }
         }
         System.out.println("\nduong chay dai nhat o vi tri "+flag+ " co do dai: "+max);
