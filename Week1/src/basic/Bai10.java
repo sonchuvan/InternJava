@@ -45,6 +45,7 @@ public class Bai10 {
             if(ktnt(i))
                 if(ktcs(i))
                     if(check(i)) System.out.println(i);
+            System.out.println("a");
         }
     }
 }
