@@ -1,7 +1,5 @@
 package bookBM;
 
-import java.util.Scanner;
-
 public class Book {
     private static int bookId = 10000;
     private String bookName;

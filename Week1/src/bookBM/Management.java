@@ -21,7 +21,7 @@ public class Management {
         if(dem >= 3 ) return false;
         return true;
     }
-    public Book searchBook(int id,Book[] books){
+    private Book searchBook(int id,Book[] books){
         for (int i = 0; i < books.length; i++) {
             if(books[i] == null) break;
             if (books[i].getBookId() == id){
@@ -30,7 +30,7 @@ public class Management {
         }
         return null;
     }
-    public void addBook(Book book){
+    private void addBook(Book book){
         for (int i = 0; i < 15; i++) {
             if(books[i] == null){
                 books[i] = book;

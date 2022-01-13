@@ -8,8 +8,6 @@ import bookBM.reader.CaoHocReader;
 import bookBM.reader.GiaoVienReader;
 import bookBM.reader.SinhVienReader;
 
-import java.util.Scanner;
-
 public class service{
     public Reader[] readers = new Reader[100];
     public Book[] books = new Book[100];

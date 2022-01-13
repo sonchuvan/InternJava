@@ -1,14 +1,5 @@
 package bookBM;
 
-import bookBM.book.CNTTBook;
-import bookBM.book.DTVTBook;
-import bookBM.book.KHTNBook;
-import bookBM.book.VHNTBook;
-import bookBM.reader.CaoHocReader;
-import bookBM.reader.GiaoVienReader;
-import bookBM.reader.SinhVienReader;
-
-import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Management[] mng = new Management[100];
@@ -101,7 +92,8 @@ public class Main {
                         temp[i].show();
                     }
                 case 0:
-
+                    System.out.println("ket thuc chuong trinh");
+                    break;
             }
 
         } while (lc!=0);
