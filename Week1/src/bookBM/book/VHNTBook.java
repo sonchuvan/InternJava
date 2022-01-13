@@ -24,7 +24,7 @@ public class VHNTBook extends Book {
     }
     @Override
     public String toString() {
-        return " bookid='" + bookId+ '\'' +
+        return "bookid='" + bookId+ '\'' +
                 ", bookName='" + this.getBookName() + '\'' +
                 ", author='" + this.getAuthor() + '\'' +
                 ", specialized='" + this.getSpecialized() + '\'' +

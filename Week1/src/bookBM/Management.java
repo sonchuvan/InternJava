@@ -40,8 +40,26 @@ public class Management {
     }
     public void muonsach(Reader reader,Book[] books1){
         this.reader = reader;
-        System.out.println("Nhap so luong sach ban doc "+reader.getId()+" muon: ");
-        int sl = in.nextInt();
+        System.out.println("Nhap so luong sach ban doc "+reader.getId()+" muon(<15): ");
+        int sl = 0;
+        boolean flag1;
+        do {
+            String digit = "\\d{1,2}";
+            String input = Management.in.next();
+            flag1 = input.matches(digit);
+            if (!flag1){
+                System.out.println("nhap sai!, moi nhap lai");
+                continue;
+            }
+            sl = Integer.parseInt(input);
+            if(sl > 15 ){
+                flag1 = false;
+                continue;
+            }
+
+        } while (!flag1);
+
+        //int sl = in.nextInt();
         int j = 1;
         for (int i = 0; i < sl; i++) {
             if (books[books.length-1]!= null) {
@@ -51,8 +69,19 @@ public class Management {
             if(books[i]==null) {
                 do {
                     System.out.println("Nhap id sach thu " + (j) + ":");
+                    int id = 0;
+                    boolean flag;
+                    do {
+                        String digit = "\\d{5}";
+                        String input = Management.in.next();
+                        flag = input.matches(digit);
+                        if (!flag){
+                            System.out.println("nhap sai!, moi nhap lai");
+                            continue;
+                        }
+                        id = Integer.parseInt(input);
 
-                    int id = in.nextInt();
+                    } while (!flag);
                     if(searchBook(id, books1)==null){
                         System.out.println("khong ton tai ID nay, Nhap lai id.");
                         continue;
@@ -72,7 +101,7 @@ public class Management {
 
     }
     public void show(){
-        System.out.println("Ban doc "+reader.getId()+" da muon cac sach:");
+        System.out.println("Ban doc "+reader.getId()+":"+reader.getName()+" da muon cac sach:");
         for (int i = 0; i < books.length; i++) {
             if (books[i]== null) break;
             System.out.print("\t");

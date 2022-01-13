@@ -13,7 +13,7 @@ public class Main {
     public static void main(String[] args) {
         Management[] mng = new Management[100];
         service sv = new service();
-        int lc;
+        int lc = 0;
         do {
             System.out.println("=========================================");
             System.out.println("Moi lua chon");
@@ -22,10 +22,26 @@ public class Main {
             System.out.println("3. Hien thi danh sach ban doc");
             System.out.println("4. Hien thi danh sach sach");
             System.out.println("5. Lap bang quan ly muon sach");
-            System.out.println("6. sap xep bang quan ly muon sach");
+            System.out.println("6. sap xep bang quan ly muon sach theo ten ban doc");
+            System.out.println("7. sap xep bang quan ly muon sach theo so luong muon");
+            System.out.println("8. Search bang quan ly muon sach theo ten ban doc");
             System.out.println("0. Exit");
             System.out.println("=========================================");
-            lc = Management.in.nextInt();
+            boolean flag;
+            do {
+
+                String digit = "[0-8]";
+                String input = Management.in.next();
+                flag = input.matches(digit);
+
+                if (!flag){
+                    System.out.println("nhap sai!, moi nhap lai");
+                    continue;
+                }
+                lc = Integer.parseInt(input);
+
+            } while (!flag);
+            //lc = Management.in.nextInt();
             switch (lc){
                 case 1:
                     sv.nhapBanDoc();break;
@@ -54,7 +70,7 @@ public class Main {
                     break;
                 case 6:
                     mng = sv.sortByName(mng);
-                    System.out.println("Bang quan ly muon sach sau khi sap xep:");
+                    System.out.println("Bang quan ly sap xep theo ten ban doc:");
                     System.out.println("=======================================================================================");
                     for (int i = 0; i < mng.length; i++) {
                         if (mng[i]==null) break;
@@ -62,7 +78,30 @@ public class Main {
                         System.out.println("=======================================================================================");
                     }
                     break;
+                case 7:
+                    mng = sv.sortBySL(mng);
+                    System.out.println("Bang quan ly sap xep theo so luong muon:");
+                    System.out.println("=======================================================================================");
+                    for (int i = 0; i < mng.length; i++) {
+                        if (mng[i]==null) break;
+                        mng[i].show();
+                        System.out.println("=======================================================================================");
+                    }
+                    break;
+                case 8:
+                    System.out.println("Nhap ten ban doc muon tim:");
+                    String name = Management.in.next();
+                    Management[] temp = sv.searchByName(mng,name);
+                    if(temp[0]==null) {
+                        System.out.println("khong co ban doc ten "+name);
+                        break;
+                    }
+                    for (int i = 0; i < temp.length; i++) {
+                        if(temp[i]==null) break;
+                        temp[i].show();
+                    }
                 case 0:
+
             }
 
         } while (lc!=0);
