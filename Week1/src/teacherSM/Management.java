@@ -10,10 +10,10 @@ public class Management {
 
 
     public Subject[] addListSubject(Subject[] s){
-        System.out.println("nhap so luong mon hoc muon them");
+        System.out.println("Nhập số lượng môn học muốn thêm");
         String sl = Main.in.next();
         while (Main.checkValid(sl,"\\d")==false){
-            System.out.println("Nhap sai, nhap lai:");
+            System.out.println("Nhập sai, mời nhập lại:");
             sl = Main.in.next();
         }
         int sl1 = Integer.parseInt(sl);
@@ -21,15 +21,15 @@ public class Management {
         for (int i = 0; i < s.length; i++) {
             if(j>sl1) break;
             if(s[i]==null){
-                System.out.println("Nhap mon hoc thu "+j+":");
+                System.out.println("Nhập môn học thứ "+j+":");
                 Subject s1 = new Subject();
-                System.out.println("Nhap ten mon hoc:");
+                System.out.println("Nhập tên môn học:");
                 s1.setName(Main.in.next());
-                System.out.println("Nhap tong so tiet hoc:");
+                System.out.println("Nhập tổng số tiết học:");
                 s1.setSoTietHoc(Main.in.nextInt());
-                System.out.println("Nhap so tiet ly thuyet:");
+                System.out.println("Nhập số tiết lý thuyết:");
                 s1.setSoTietLyThuyet(Main.in.nextInt());
-                System.out.println("Nhap hoc phi 1 tiet");
+                System.out.println("Nhập học phí 1 tiết");
                 s1.setHocPhi(Main.in.nextInt());
                 s[i] = s1;
                 j++;
@@ -40,7 +40,7 @@ public class Management {
     }
 
     public void showMonHoc(Subject[] s){
-        System.out.println("Danh sach mon hoc:");
+        System.out.println("Danh sách môn học:");
         for (int i = 0; i < s.length; i++) {
             if (s[i] == null){
                 break;
@@ -51,10 +51,10 @@ public class Management {
     }
 
     public Teacher[] addListTeacher(Teacher[] teachers){
-        System.out.println("nhap so luong giang vien muon them");
+        System.out.println("Nhập số lượng giảng viên muốn thêm");
         String sl = Main.in.next();
         while (Main.checkValid(sl,"\\d")==false){
-            System.out.println("Nhap sai, nhap lai:");
+            System.out.println("Nhập sai, mời nhập lại:");
             sl = Main.in.next();
         }
         int sl1 = Integer.parseInt(sl);
@@ -62,17 +62,23 @@ public class Management {
         for (int i = 0; i < teachers.length; i++) {
             if(j>sl1) break;
             if(teachers[i]==null){
-                System.out.println("Nhap giang vien thu "+j+":");
-                System.out.println("Chon loai giang vien");
-                System.out.println("1: Giao su tien si");
-                System.out.println("2: Pho giao su tien si");
-                System.out.println("3: Giao vien chinh");
-                System.out.println("4: Tien si");
+                System.out.println("Nhập thông tin cho giảng viên thứ "+j+":");
+                System.out.println("Chọn loại giảng viên");
+                System.out.println("1: Giáo sư tiến sĩ");
+                System.out.println("2: Phó giáo sư, tiến sĩ");
+                System.out.println("3: Giáo viên chính");
+                System.out.println("4: Tiến sĩ");
 
                 int lgv = 0;
-                do{
-                    lgv = Main.in.nextInt();
-                }while (lgv < 0 || lgv >5);
+                String k1 = Main.in.next();
+                while (Main.checkValid(k1,"[0-4]")==false){
+                    System.out.println("Nhập sai, Mời nhập lại:");
+                    k1 = Main.in.next();
+                }
+                lgv = Integer.parseInt(k1);
+//                do{
+//                    lgv = Main.in.nextInt();
+//                }while (lgv < 0 || lgv >5);
                 Teacher s1 = null;
                 switch (lgv){
                     case 1:
@@ -89,11 +95,11 @@ public class Management {
                         break;
                 }
 
-                System.out.println("Nhap ten giang vien:");
+                System.out.println("Nhập tên giảng viên:");
                 s1.setName(Main.in.next());
-                System.out.println("Nhap dia chi giang vien:");
+                System.out.println("Nhập địa chỉ giảng viên:");
                 s1.setAddress(Main.in.next());
-                System.out.println("Nhap so dien thoai giang vien:");
+                System.out.println("Nhập số điện thoại giảng viên:");
                 s1.setPhone(Main.in.next());
                 teachers[i] = s1;
                 j++;
@@ -103,7 +109,7 @@ public class Management {
     }
 
     public void showListTeacher(Teacher[] teachers){
-        System.out.println("Danh sach mon hoc:");
+        System.out.println("Danh sách giảng viên:");
         for (int i = 0; i < teachers.length; i++) {
             if (teachers[i] == null){
                 break;
@@ -162,9 +168,22 @@ public class Management {
             d:
             do {
                 System.out.println("Nhập mã môn học thứ "+(k+1)+"(nhập 0 để kết thúc):");
-                //int ids;
                 do {
-                    int ids = Main.in.nextInt();
+                    int ids = 0;
+                    boolean flag;
+                    do {
+
+                        String digit = "\\d";
+                        String input = Main.in.next();
+                        flag = input.matches(digit);
+
+                        if (!flag){
+                            System.out.println("nhập sai!, mời nhập lại");
+                            continue;
+                        }
+                        ids = Integer.parseInt(input);
+
+                    } while (!flag);
                     if(!checkSubject(mng[i].subject,ids)){
                         System.out.println("Môn học đã được nhập,hãy nhập môn học khác(nhập 0 để kết thúc)");
                         continue;
