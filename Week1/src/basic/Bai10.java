@@ -15,7 +15,7 @@ public class Bai10 {
             if (!checkPrimeNumber(n % 10)) {
                 return false;
             }
-            n = n/10;
+            n = n / 10;
         }
         return true;
     }
@@ -25,18 +25,17 @@ public class Bai10 {
         while (n != 0) {
             int digit = n % 10;
             reversed = reversed * 10 + digit;
-            n = n/10;
+            n = n / 10;
         }
         return checkPrimeNumber(reversed);
     }
+
     public static void main(String[] args) {
-        System.out.println(checkInverseNumber(3222223));
+        System.out.println("Kết quả:");
 
         for (int i = 1000001; i < 9999999; i += 2) {
-            if (checkPrimeNumber(i))
-                if(checkNumberPrime(i))
-                    if(checkInverseNumber(i))
-                        System.out.println(i);
+            if (checkPrimeNumber(i) && checkNumberPrime(i) && checkInverseNumber(i))
+                System.out.println(i);
         }
     }
 }
