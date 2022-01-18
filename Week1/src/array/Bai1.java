@@ -3,22 +3,36 @@ package array;
 import java.util.Scanner;
 
 public class Bai1 {
-    public static void main(String[] args) {
-        Scanner in = new Scanner(System.in);
-        System.out.print("nhap n:");
+    static Scanner in = new Scanner(System.in);
+
+    static int[] input() {
+        System.out.print("Nhập n:");
         int n = in.nextInt();
-        int[] a = new int[n];
+        int[] arr = new int[n];
+        System.out.println("Nhập các phần tử của mảng:");
         for (int i = 0; i < n; i++) {
-            a[i] = in.nextInt();
+            System.out.println("Nhập a[" + i + "]");
+            arr[i] = in.nextInt();
         }
-        boolean flag = true;
-        for (int i = 0; i < n; i++) {
-            if(a[i]!=a[n-i-1]) {
-                System.out.println("mang khong doi xung");
-                flag = false;
-                break;
+        return arr;
+    }
+
+    static boolean checkSymmetry(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            if (arr[i] != arr[arr.length - i - 1]) {
+                return false;
             }
         }
-        if (flag) System.out.println("mang doi xung");
+        return true;
+    }
+
+    public static void main(String[] args) {
+        int[] arr = input();
+        if (checkSymmetry(arr)) {
+            System.out.println("Mảng đối xứng");
+        } else {
+            System.out.println("Mảng không đối xứng");
+        }
+
     }
 }

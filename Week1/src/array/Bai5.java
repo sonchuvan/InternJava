@@ -4,13 +4,19 @@ import java.util.Scanner;
 
 public class Bai5 {
     static Scanner in = new Scanner(System.in);
-    static int[] input(int n){
-        int[] a = new int[n];
+
+    static int[] input() {
+        System.out.print("Nhập n:");
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Nhập các phần tử của mảng:");
         for (int i = 0; i < n; i++) {
-            a[i] = in.nextInt();
+            System.out.println("Nhập arr[" + i + "]");
+            arr[i] = in.nextInt();
         }
-        return a;
+        return arr;
     }
+
     static int[] insert(int[] a,int[] b, int p){
         int z = a.length+b.length;
         int[] c = new int[z];
@@ -31,19 +37,21 @@ public class Bai5 {
         }
         return c;
     }
-    public static void main(String[] args) {
-        System.out.print("nhap n:");
-        int n = in.nextInt();
-        int[] a = input(n);
-        System.out.print("nhap m:");
-        int m = in.nextInt();
-        int[] b = input(m);
-        System.out.print("nhap p:");
-        int p = in.nextInt();
 
-        int[] c = insert(a,b,p);
-        for (int i = 0; i < m + n; i++) {
-            System.out.print(c[i]+" ");
+    static void output(int[] arr) {
+        System.out.println("Kết quả:");
+        for (int i = 0; i < arr.length; i++) {
+            System.out.print(arr[i] + " ");
         }
+    }
+
+    public static void main(String[] args) {
+
+        int[] a = input();
+        int[] b = input();
+        System.out.print("Nhập p:");
+        int p = in.nextInt();
+        int[] c = insert(a,b,p);
+        output(c);
     }
 }

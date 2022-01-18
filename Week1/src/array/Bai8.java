@@ -21,7 +21,7 @@ public class Bai8 {
             System.out.println();
         }
     }
-    static int[][] nhan(int[][] a, int[][] b){
+    static int[][] multiplication(int[][] a, int[][] b){
         int m = a.length;
         int n = b[0].length;
         int[][] c = new int[m][n];
@@ -52,7 +52,7 @@ public class Bai8 {
         print(a);
         System.out.println("ma tran b: ");
         print(b);
-        int[][] c = nhan(a,b);
+        int[][] c = multiplication(a,b);
         System.out.println("ma tran tich: ");
         print(c);
 

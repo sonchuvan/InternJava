@@ -1,40 +1,40 @@
 package array;
 
-import java.lang.reflect.Array;
-import java.util.Arrays;
 import java.util.Scanner;
 
 public class Bai3 {
     static Scanner in = new Scanner(System.in);
-    static int[] sort(int a[]){
-        for (int i = 0; i < a.length; i++) {
-            for (int j = i+1; j < a.length; j++) {
-                if(a[i]>a[j]){
-                    int temp = a[i];
-                    a[i] = a[j];
-                    a[j] = temp;
+
+    static int[] input() {
+        System.out.print("Nhập n:");
+        int n = in.nextInt();
+        int[] arr = new int[n];
+        System.out.println("Nhập các phần tử của mảng:");
+        for (int i = 0; i < n; i++) {
+            System.out.println("Nhập arr[" + i + "]");
+            arr[i] = in.nextInt();
+        }
+        return arr;
+    }
+
+    static int[] sortArray(int[] arr) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i + 1; j < arr.length; j++) {
+                if (arr[i] > arr[j]) {
+                    int temp = arr[i];
+                    arr[i] = arr[j];
+                    arr[j] = temp;
                 }
             }
         }
-        return a;
+        return arr;
     }
-    static int[] input(int n){
-        int[] a = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = in.nextInt();
-        }
-        return a;
-    }
-    public static void main(String[] args) {
-        System.out.print("nhap n:");
-        int n = in.nextInt();
-        int[] a = input(n);
-        a = sort(a);
-        int max = 0;
+    static void countNumber(int[] a){
+        int max = 1;
         int temp = a[0];
-        for (int i = 0; i < n; i++) {
+        for (int i = 0; i < a.length; i++) {
             int dem=1;
-            for (int j = i+1; j < n ; j++) {
+            for (int j = i+1; j < a.length ; j++) {
                 if (a[i]==a[j]){
                     dem++;
                     i++;
@@ -44,8 +44,15 @@ public class Bai3 {
                     }
                 }else break;
             }
-            System.out.println(a[i]+" xuat hien "+ dem+" lan");
+            System.out.println(a[i]+" xuất hiện "+ dem+" lần");
         }
-        System.out.println(temp+" xuat hien nhieu nhat voi "+ max+" lan");
+        System.out.println(temp+" xuất hiện nhiều nhất "+ max+" lần");
+    }
+
+    public static void main(String[] args) {
+
+        int[] arr = input();
+        arr = sortArray(arr);
+        countNumber(arr);
     }
 }
