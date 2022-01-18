@@ -7,7 +7,7 @@ public class Bai1 {
         return true;
     }
     public static void main(String[] args) {
-        System.out.println("Các số nghịch đảo có 6 chữ số");
+        System.out.println("Các số Thuận nghịch có 6 chữ số");
         for (int i = 100001; i <= 999999 ; i++) {
             if (checkReverse(String.valueOf(i)))
                 System.out.print(i+" ");
