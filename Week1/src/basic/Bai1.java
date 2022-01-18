@@ -8,13 +8,11 @@ public class Bai1 {
         System.out.print("nhap n:");
         int n = in.nextInt();
         float s = 0;
-        if(n%2!=0){
-            for(int i=1;i<=n;i+=2){
+        for (int i = 0; i <= n; i++) {
+            if(n%2==0 && i%2==0){
                 s+=i;
             }
-        }
-        else{
-            for(int i=0;i<=n;i+=2){
+             if(n%2!=0 && i%2!=0){
                 s+=i;
             }
         }

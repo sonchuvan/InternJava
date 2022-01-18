@@ -1,53 +1,46 @@
 package basic;
 
 public class Bai9 {
-    static int demSo(int n){
-        int count = 0;
-        while (n>0){
-            n=n/10;
-            count++;
-        }
-        return count;
-    }
-    static int[] convertToArr(int n){
-        int scs = demSo(n);
-        int[] arr = new int[scs];
-        int i=0;
-        while (n>0){
-            arr[i] = n%10;
-            i++;
-            n=n/10;
-        }
-        return arr;
-    }
-    static int sumArr(int[] arr){
-        int s = 0;
-        for (int i = 0; i < arr.length; i++) {
-            s+= arr[i];
-        }
-        return s;
-    }
 
-    static boolean kt(int n){
-        int[] arr = convertToArr(n);
-        if(sumArr(arr)%10!=0) return false;
-        for (int i = 0; i < arr.length/2; i++) {
-            if(arr[i]==1 ||arr[i] == 2 ||arr[i] == 3 ||arr[i] == 4 ||arr[i] == 5 ||arr[i] == 7 ||arr[i] == 9 ) return false;
-            if(arr[i] != arr[arr.length-i-1]) return false;
-
+    static boolean checkInverseNumber(int n) {
+        int temp = n, res = 0;
+        while (n > 0) {
+            //temp = ;
+            res = res * 10 + n % 10;
+            n = n / 10;
         }
+        if (res != temp) return false;
         return true;
     }
 
-    public static void main(String[] args) {
+    static boolean checkDivisible10(int n) {
+        int sum = 0;
+        while (n > 0) {
+            sum = sum + n % 10;
+            n = n / 10;
+        }
+        if (sum % 10 != 0) return false;
+        return true;
+    }
+
+    static boolean checkNumber068(int n) {
         int dem = 0;
-        for (int i = 6000000; i<=888888888 ; i++) {
-           // System.out.println(i);
-            if(kt(i)){
-                System.out.print(i+" ");
+        while (n > 0) {
+            if ((n % 10) % 2 == 0 && n % 10 != 2 && n % 10 != 4 ) {
                 dem++;
             }
+            n = n/10;
         }
-        if(dem ==0) System.out.println("khong co so phu hop");
+        if(dem == 7) return true;
+        return false;
+    }
+
+    public static void main(String[] args) {
+        System.out.println("cac so thuan nghich co 7 chu so:");
+        for (int i = 1000000; i <= 9999999; i++) {
+            if (checkInverseNumber(i) && checkDivisible10(i) && checkNumber068(i)) {
+                System.out.print(i + " ");
+            }
+        }
     }
 }
