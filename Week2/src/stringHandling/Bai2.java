@@ -11,7 +11,5 @@ public class Bai2 {
             str.setCharAt(i,str.substring(i,i+1).toUpperCase().charAt(0));
         }
         System.out.println(str);
-        String s = "sfsdf";
-        System.out.println(s.substring(4,5));
     }
 }
