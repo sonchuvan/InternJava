@@ -49,7 +49,7 @@ public class Roster implements Serializable {
             }while (true);
             String numTemp;
             do {
-                System.out.println("Nhập số tuyến:");
+                System.out.println("Nhập số lượt chạy tuyến:");
                 numTemp = Main.in.nextLine();
             }while (!numTemp.matches("\\d+"));
             int num = Integer.parseInt(numTemp);
@@ -96,6 +96,11 @@ public class Roster implements Serializable {
 
     public List<Roster> sortByName(List<Roster> rosters){
         Collections.sort(rosters, Comparator.comparing((Roster r) -> r.busDriver.getDriverName()));
+        return rosters;
+    }
+    public List<Roster> sortByTotalRoute(List<Roster> rosters){
+
+        Collections.sort(rosters,Comparator.comparing((Roster r)->r.busRoutes.size()));
         return rosters;
     }
 }

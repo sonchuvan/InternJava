@@ -64,11 +64,14 @@ public class Main {
                     FileIO.readObjectFromFile("roster.data").forEach(System.out::println);
                     break;
                 case 4:
-                    System.out.println("Danh sách phân công sau khi sắp xếp");
+                    System.out.println("Danh sách phân công sau khi sắp xếp theo tên");
                     roster.sortByName(rosters);
                     rosters.forEach(System.out::println);
                     break;
                 case 5:
+                    System.out.println("Danh sách phân công sau khi sắp xếp theo số tuyến");
+                    roster.sortByTotalRoute(rosters);
+                    rosters.forEach(System.out::println);
                     break;
                 case 6:
                     break;
