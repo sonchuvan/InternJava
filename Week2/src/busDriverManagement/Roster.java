@@ -98,9 +98,26 @@ public class Roster implements Serializable {
         Collections.sort(rosters, Comparator.comparing((Roster r) -> r.busDriver.getDriverName()));
         return rosters;
     }
+
     public List<Roster> sortByTotalRoute(List<Roster> rosters){
 
         Collections.sort(rosters,Comparator.comparing((Roster r)->r.busRoutes.size()));
+        Collections.reverse(rosters);
         return rosters;
+    }
+    public float getRange(Map<BusRoute,Integer> rosterList ){
+        float total=0;
+        for (Map.Entry<BusRoute,Integer> entry :rosterList.entrySet()){
+            total=total+entry.getValue()*entry.getKey().getRange();
+        }
+        return total;
+    }
+    public void calculateRange(List<Roster> rosters){
+        System.out.println("Khoảng cách lái xe:");
+        for (Roster r: rosters) {
+            System.out.print("Tài xế "+r.busDriver.getDriverName());
+            System.out.print("đã lái "+ getRange(r.busRoutes)+" km");
+        }
+
     }
 }

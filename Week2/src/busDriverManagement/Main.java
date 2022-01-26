@@ -74,6 +74,8 @@ public class Main {
                     rosters.forEach(System.out::println);
                     break;
                 case 6:
+                    System.out.println("Bảng thống kê khoảng cách lái xe:");
+                    roster.calculateRange(rosters);
                     break;
                 case 0:
                     System.out.println("Kết thúc chương trình");
