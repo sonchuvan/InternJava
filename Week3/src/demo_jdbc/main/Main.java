@@ -1,6 +1,6 @@
 package demo_jdbc.main;
 
-import demo_jdbc.connection.DBService;
+import demo_jdbc.servive.DBService;
 import demo_jdbc.entity.BusRoute;
 import demo_jdbc.entity.Driver;
 import demo_jdbc.entity.driving.Driving;

@@ -1,6 +1,5 @@
 package demo_jdbc.servive;
 
-import demo_jdbc.connection.DBService;
 import demo_jdbc.entity.Driver;
 import demo_jdbc.main.Main;
 
