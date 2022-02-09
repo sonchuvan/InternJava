@@ -57,7 +57,7 @@ public class Driving implements Serializable {
                 System.out.println("mã tài xế phải là số nguyên, vui lòng nhập lại");
             }
         } while (true);
-        System.out.println("Bạn đã chọn tài xế: "+Main.dbService.searchDriver(driverID).getFullName());
+        System.out.println("Bạn đã chọn tài xế: "+Main.drivingDBService.searchDriver(driverID).getFullName());
         System.out.println("Nhập số lượng tuyến bus được phân công của tài xế: ");
         do {
             try {
@@ -134,7 +134,7 @@ public class Driving implements Serializable {
     }
 
     public boolean checkBusRouteFromList(int busRouteID) {
-        for (BusRoute busRoute : Main.busRouteList) {
+        for (BusRoute busRoute : Main.busRouteDBService.getListBusRouteFromDB()) {
             if (busRoute.getRouteID() == busRouteID) {
                 return true;
             }
@@ -153,7 +153,7 @@ public class Driving implements Serializable {
 
     public BusRoute getBusRouteByID(int busRouteID) {
         BusRoute busRouteTemp = new BusRoute();
-        for (BusRoute busRoute : Main.busRouteList) {
+        for (BusRoute busRoute : Main.busRouteDBService.getListBusRouteFromDB()) {
             if (busRoute.getRouteID() == busRouteID) {
                 busRouteTemp = busRoute;
                 return busRouteTemp;
@@ -163,7 +163,7 @@ public class Driving implements Serializable {
     }
 
     public boolean checkDriverFromDriverList(int driverID) {
-        for (Driver driver : Main.driverList) {
+        for (Driver driver : Main.driverDBService.getListDriverFromDB()) {
             if (driver.getDriverId() == driverID) {
                 return true;
             }
@@ -172,7 +172,7 @@ public class Driving implements Serializable {
     }
 
     public boolean checkDriverFromDrivingList(int id) {
-        for (Driving driving : Main.drivingList) {
+        for (Driving driving : Main.drivingDBService.getListDrivingFromDB()) {
             if (driving.driver.getDriverId() == id) {
                 return true;
             }
@@ -182,7 +182,7 @@ public class Driving implements Serializable {
 
     public Driver getDriverByID(int driverID) {
         Driver driverTemp = new Driver();
-        for (Driver driver : Main.driverList) {
+        for (Driver driver : Main.driverDBService.getListDriverFromDB()) {
             if (driver.getDriverId() == driverID) {
                 driverTemp = driver;
                 return driverTemp;

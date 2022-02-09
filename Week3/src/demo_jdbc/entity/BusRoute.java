@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 public class BusRoute implements Serializable {
 
-    private static int COUNT = 100;
+    public static int COUNT;
     private int routeID;
     private float range;
     private int numberOfStops;

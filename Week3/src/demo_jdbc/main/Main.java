@@ -1,30 +1,27 @@
 package demo_jdbc.main;
 
-import demo_jdbc.servive.DBService;
 import demo_jdbc.entity.BusRoute;
 import demo_jdbc.entity.Driver;
-import demo_jdbc.entity.driving.Driving;
-import demo_jdbc.servive.BusRouteService;
-import demo_jdbc.servive.DriverService;
-import demo_jdbc.servive.DrivingService;
-import demo_jdbc.util.DataUtil;
+import demo_jdbc.servive.busRouteService.BusRouteDBService;
+import demo_jdbc.servive.busRouteService.BusRouteService;
+import demo_jdbc.servive.driverService.DriverDBService;
+import demo_jdbc.servive.driverService.DriverService;
+import demo_jdbc.servive.drivingService.DrivingDBService;
+import demo_jdbc.servive.drivingService.DrivingService;
 import demo_jdbc.util.file.FileUtil;
 
-import java.util.ArrayList;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-    public static List<Driver> driverList;// = new ArrayList<>();
-    public static List<BusRoute> busRouteList;// = new ArrayList<>();
-    public static List<Driving> drivingList;// = new ArrayList<>();
+    public static BusRouteDBService busRouteDBService = new BusRouteDBService();
+    public static DriverDBService driverDBService  = new DriverDBService();
+    public static DrivingDBService drivingDBService = new DrivingDBService();
 
     public static DrivingService drivingService = new DrivingService();
     public static DriverService driverService = new DriverService();
     public static BusRouteService busRouteService = new BusRouteService();
-    public static DBService dbService = new DBService();
 
     public static FileUtil fileUtil = new FileUtil();
 
@@ -34,14 +31,19 @@ public class Main {
     }
 
     private static void initializeData(){
-        List<Driver> driverFromFile = dbService.getListDriverFromDB();
-        Main.driverList = DataUtil.isNullOrEmpty(driverFromFile)?new ArrayList<>():(List<Driver>)driverFromFile;
+        if (driverDBService.getListDriverFromDB().size()!=0){
+            Driver.COUNT = driverDBService.getMaxId()+1;
+        }
+        else {
+            Driver.COUNT = 10000;
+        }
+        if (driverDBService.getListDriverFromDB().size()!=0){
+            BusRoute.COUNT = driverDBService.getMaxId()+1;
+        }
+        else {
+            BusRoute.COUNT = 100;
+        }
 
-        List<BusRoute> busRouteFromFile = dbService.getListBusRouteFromDB();
-        Main.busRouteList = DataUtil.isNullOrEmpty(busRouteFromFile)?new ArrayList<>():(List<BusRoute>)busRouteFromFile;
-
-        List<Driving> drivingFromFile = dbService.getListDrivingFromDB();
-        Main.drivingList = DataUtil.isNullOrEmpty(drivingFromFile)?new ArrayList<>():(List<Driving>)drivingFromFile;
     }
 
     public static int choice() {
@@ -74,35 +76,32 @@ public class Main {
             int choice = choice();
             switch (choice){
                 case 1:
-                    //driverService.addNewListDriver();
+                    driverService.addNewListDriver();
                     driverService.showListDriver();
                     break;
                 case 2:
-                    //busRouteService.addNewListBusRoute();
+                    busRouteService.addNewListBusRoute();
                     busRouteService.showListBusRoute();
                     break;
                 case 3:
-                    if(driverList.size()==0){
+                    if(driverDBService.getListDriverFromDB().size()==0){
                         System.out.println("Chưa có thông tin tài xế nào, vui lòng nhập thông tin tài xế.");
                         break;
                     }
-                    if(busRouteList.size()==0){
+                    if(busRouteDBService.getListBusRouteFromDB().size()==0){
                         System.out.println("Chưa có thông tin tuyến bus nào, vui lòng nhập thông tin tuyến bus.");
                         break;
                     }
                     drivingService.addNewListDriving();
-                    drivingService.showListDriving();
+                    drivingService.showListDriving(drivingDBService.getListDrivingFromDB());
                     break;
                 case 4:
                     System.out.println("Sắp xếp bảng phân công theo tên tài xế");
-                    drivingService.sortDrivingByName();
-                    driverService.showListDriver();
-                    drivingService.showListDriving();
+                    drivingService.showListDriving(drivingService.sortDrivingByName());
                     break;
                 case 5:
                     System.out.println("Sắp xếp bảng phân công theo tổng số tuyến");
-                    drivingService.sortByCountBusRoute();
-                    drivingService.showListDriving();
+                    drivingService.showListDriving(drivingService.sortByCountBusRoute());
                     break;
                 case 6:
                     drivingService.showSumRangeForDriver();

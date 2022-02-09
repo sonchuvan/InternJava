@@ -1,21 +1,18 @@
-package demo_jdbc.servive;
+package demo_jdbc.servive.drivingService;
 
 import demo_jdbc.entity.driving.Driving;
 import demo_jdbc.entity.driving.RouteDriving;
 import demo_jdbc.main.Main;
 
-import java.util.Comparator;
-import java.util.InputMismatchException;
-import java.util.ListIterator;
-import java.util.Scanner;
+import java.util.*;
 
 public class DrivingService {
 
-    DBService dbService = new DBService();
+    DrivingDBService drivingDBService = new DrivingDBService();
     public static final String DRIVING_DATA = "driving.dat";
 
     public void addNewListDriving() {
-        int temp = Main.driverList.size() - Main.drivingList.size();
+        int temp = Main.driverDBService.getListDriverFromDB().size() - Main.drivingDBService.getListDrivingFromDB().size();
         if (temp == 0){
             System.out.println("Tất cả tài xế đã được phân công");
             return;
@@ -33,8 +30,7 @@ public class DrivingService {
                     for (int i = 0; i < drivingNumber; i++) {
                         Driving driving = new Driving();
                         driving.inputInfor();
-                        Main.drivingList.add(driving);
-                        dbService.saveDrivingToDB(driving);
+                        drivingDBService.saveDrivingToDB(driving);
                     }
                     break;
                 }
@@ -50,22 +46,27 @@ public class DrivingService {
         return new Driving();
     }
 
-    public void sortDrivingByName() {
-        Main.drivingList.sort(new Comparator<Driving>() {
+    public List<Driving> sortDrivingByName() {
+        List<Driving> drivingList = Main.drivingDBService.getListDrivingFromDB();
+        drivingList.sort(new Comparator<Driving>() {
             @Override
             public int compare(Driving a, Driving b) {
                 return b.getDriver().getFullName().compareTo(a.getDriver().getFullName());
             }
         });
+        return drivingList;
     }
 
-    public void sortByCountBusRoute() {
-        Main.drivingList.sort(new Comparator<Driving>() {
+    public List<Driving> sortByCountBusRoute() {
+        List<Driving> drivingList = Main.drivingDBService.getListDrivingFromDB();
+        drivingList.sort(new Comparator<Driving>() {
             @Override
             public int compare(Driving a, Driving b) {
                 return countBusRoute(b) - countBusRoute(a);
             }
         });
+
+        return drivingList;
     }
 
     public int sumRangeForDriver(Driving driving) {
@@ -82,7 +83,7 @@ public class DrivingService {
         System.out.println("--------------------------------------------------------------");
         System.out.printf("%10s","Tài xế");
         System.out.println("\t\tkhoảng cách");
-        for (Driving driving : Main.drivingList) {
+        for (Driving driving : Main.drivingDBService.getListDrivingFromDB()) {
             int sum = 0;
             System.out.printf(format, driving.getDriver().getFullName());
             System.out.printf(format, sumRangeForDriver(driving));
@@ -94,10 +95,10 @@ public class DrivingService {
         return driving.getRouteDrivingList().size();
     }
 
-    public void showListDriving() {
+    public void showListDriving(List<Driving> drivingList) {
         System.out.println("--------------------------------------------------------------");
         System.out.println("Bảng phân công tuyến bus");
-        ListIterator<Driving> listIterator = Main.drivingList.listIterator();
+        ListIterator<Driving> listIterator = drivingList.listIterator();
         while (listIterator.hasNext()) {
             System.out.println(listIterator.next().toString());
         }

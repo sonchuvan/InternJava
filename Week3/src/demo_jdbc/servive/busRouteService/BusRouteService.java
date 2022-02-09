@@ -1,14 +1,14 @@
-package demo_jdbc.servive;
+package demo_jdbc.servive.busRouteService;
 
 import demo_jdbc.entity.BusRoute;
-import demo_jdbc.main.Main;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class BusRouteService {
 
-    DBService dbService = new DBService();
+    BusRouteDBService busRouteDBService = new BusRouteDBService();
     public static final String BUS_ROUTE_DATA = "busroute.dat";
 
     public void addNewListBusRoute() {
@@ -19,8 +19,7 @@ public class BusRouteService {
                 if (number > 0) {
                     for (int i = 0; i < number; i++) {
                         BusRoute busRoute = addNewBusRoute();
-                        addBusRouteToList(busRoute);
-                        dbService.saveBusRouteToDB(busRoute);
+                        busRouteDBService.saveBusRouteToDB(busRoute);
                     }
                     break;
                 }
@@ -29,7 +28,6 @@ public class BusRouteService {
                 System.out.println("Số lượng tuyến bus phải là số nguyên, vui lòng nhập lại");
             }
         } while (true);
-        //Main.fileUtil.writeDataToDB(Main.busRouteList,BUS_ROUTE_DATA);
     }
 
     public BusRoute addNewBusRoute() {
@@ -38,14 +36,11 @@ public class BusRouteService {
         return busRoute;
     }
 
-    public void addBusRouteToList(BusRoute busRoute) {
-        Main.busRouteList.add(busRoute);
-    }
-
     public void showListBusRoute() {
         System.out.println("--------------------------------------------------------------");
         System.out.println("Danh sách tuyến xe");
-        for (BusRoute busRoute : Main.busRouteList) {
+        List<BusRoute> busRouteList = busRouteDBService.getListBusRouteFromDB();
+        for (BusRoute busRoute : busRouteList) {
             System.out.println(busRoute.toString());
         }
     }

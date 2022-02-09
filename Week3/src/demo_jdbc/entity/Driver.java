@@ -5,7 +5,7 @@ import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Driver extends Person implements Serializable {
-    private static int COUNT = 10000;
+    public static int COUNT;
     private int driverId;
 
     public static final String A = "A";
