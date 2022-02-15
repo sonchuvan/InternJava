@@ -29,9 +29,9 @@ INSERT INTO bus_route VALUES(100,300,10);
 INSERT INTO bus_route VALUES(101,250,8);
 INSERT INTO bus_route VALUES(102,200,8);
 
-INSERT INTO driver VALUES(10000, 'son', 'ha noi', '0987654321', 'A');
-INSERT INTO driver VALUES(10001, 'manh', 'ha noi', '0123456789', 'A');
-INSERT INTO driver VALUES(10002, 'thinh', 'ha noi', '0546329439', 'A');
+INSERT INTO driver VALUES(10000, 'chu van son', 'ha noi', '0987654321', 'A');
+INSERT INTO driver VALUES(10001, 'nguyen xuan manh', 'ha noi', '0123456789', 'A');
+INSERT INTO driver VALUES(10002, 'nguyen van thinh', 'ha noi', '0546329439', 'A');
 
 INSERT INTO driving VALUES(10000,100,5);
 INSERT INTO driving VALUES(10000,101,5);
